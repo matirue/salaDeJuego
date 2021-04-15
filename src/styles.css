@@ -1,0 +1,21 @@
+/*html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-typography{
+    background-image: url("assets/mundoMario.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background: url("assets/mundoMario.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    background-size: cover;
+    
+}
+
+.swal-modal pre  {
+    background-color: rgba(63,255,106,0.69);
+    border: 3px solid white;
+  }
+
+  */
+

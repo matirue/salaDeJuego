@@ -1,0 +1,57 @@
+<head>
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm navbar-dark ">
+
+        <a href="#" class="logo">
+            <img src="./../assets/toadMario.png" width="35px" height="30px">
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <button routerLink="/quienSoy" class="btn btn-outline-success my-2 my-sm-0" type="submit">Quien
+                soy?</button>
+            <button routerLink="/" class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerrar sesion</button>
+        </div>
+    </nav>
+
+    <div class="container" style="margin: 100px;">
+        <div class="row">
+            <div class="col-12 columna12">JUEGOS</div>
+            <div class="col borde">
+                <a routerLink="/piedraPapelTijera" class="imgGame">
+                    <img src="./../../../assets/Piedra Papel Tijera/scissors.png" alt="">
+                </a>
+                <p>Piedra, Papel o Tijera</p>
+            </div>
+            <div class="col borde">
+                <a routerLink="/tateti" class="imgGame">
+                    <img src="./../../../assets/tateti/tic-tac-toe.png" alt="">
+                </a>
+                <p>Ta-Te-Ti</p>
+            </div>
+            <div class="col borde">
+                <a routerLink="/memotest" class="imgGame">
+                    <img src="./../../../assets/memotest/de-igual-a-igual.png" alt="">
+                </a>
+                <p>Memotest</p>
+            </div>
+            <div class="col borde">
+                <a routerLink="/caraCruz" class="imgGame">
+                    <img src="./../../../assets/moneda.png">
+                </a>
+                <p>Cara o Cruz</p>
+            </div>
+        </div>
+    </div>
+</body>
