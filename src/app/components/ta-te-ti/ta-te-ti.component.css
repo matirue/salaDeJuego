@@ -40,3 +40,16 @@ body button{
 body button:hover, .main button:active, .main button:focus{
     background: rgb(170, 0, 0);
 }
+
+.title {
+    height: 100px;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    border-radius: 100%;
+}
+.title h1{
+    font-family: 'Press Start 2P', cursive;
+    
+    color: #961818;
+}
