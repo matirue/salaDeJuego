@@ -1,4 +1,6 @@
 @import url(./../../../assets/fonts.css);
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@100&display=swap');
+
 
 body{
     background: url("./../../../assets/mundoMario.jpg") no-repeat center center fixed;
@@ -35,6 +37,12 @@ body{
        margin: auto;
        border-radius: 20px;
    }
+
+   .form h2{
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    color: #961818;
+    } 
 
    .form input{
        width: 100%;

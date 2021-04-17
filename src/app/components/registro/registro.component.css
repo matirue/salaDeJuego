@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@100&display=swap');
+
+
 .example-spacer {
     flex: 1 1 auto;
   }
@@ -12,11 +15,14 @@
       background-position: center;
   }
 
+  
   .form h1{
-      font-family: 'Times New Roman', Times, serif;
-      font-size: 25px;
-      margin: 10px 0px 10px 99px;
-  }
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    color: #961818;
+    } 
+
+
 
   .form{
       width: 300px;

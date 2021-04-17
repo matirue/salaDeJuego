@@ -1,12 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@100&display=swap');
 
-
-/* Para que ocupe toda la ventana y se expanda sin márgenes ni relleno */
 * {
-	margin:0;
-	padding: 0;
-	box-sizing: border-box;
+    animation: fadeIn 1.5s;  
 }
+
 body{
     background-image: url("./../../../assets/mundoMario.jpg");
 	/**background-color:#110F26;
@@ -41,15 +38,134 @@ body button:hover, .main button:active, .main button:focus{
     background: rgb(170, 0, 0);
 }
 
-.title {
+label {
     height: 100px;
     width: 100%;
     padding: 20px;
     text-align: center;
     border-radius: 100%;
 }
-.title h1{
-    font-family: 'Press Start 2P', cursive;
-    
+label h1{
+    font-family: 'Press Start 2P', cursive;    
     color: #961818;
+    top: 0%;
+    height: 20%;
+    width: 100%;
+    text-align: center;
+}
+
+.contenedor-tateti {
+    
+    height: 50% auto;
+    width: 100%;
+    justify-content: center;
+    border-radius: 10%;
+    background-color: rgba(100, 100, 100, 0.385);
+    border: 0px;
+    overflow: hidden;
+    margin: 10px;   
+    min-height: 100px;
+}
+
+.contenedor-game {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+/*tablero y espacio*/
+
+.circulo {
+    background-image: url("../../../assets/tateti/O.png");
+}
+
+.cruz {
+    background-image: url("../../../assets/tateti/X.png");
+}
+
+.contenedor-tablero {
+    height: 90%;
+    width: 60%;
+}
+
+.espacio {
+    height: 33.33%;
+    width: 33.33%;
+    padding: 1%;
+    background-size: 100% 100%;
+    border: 0px;
+}
+
+.espacio_0, 
+.espacio_1, 
+.espacio_2, 
+.espacio_3, 
+.espacio_4, 
+.espacio_5, 
+.espacio_6, 
+.espacio_7, 
+.espacio_8 {
+    height: 33.33%;
+    width: 33.33%;
+    padding: 1%;
+    background-size: 100% 100%;
+    border: 0px;
+}
+
+.espacio_0 {
+    border-right: 2px solid var(rgb(255, 255, 255));
+    border-bottom: 2px solid var(rgb(255, 255, 255));
+    border-top-left-radius: 20%;
+}
+
+.espacio_1 {
+    border-left: 2px solid var(rgb(255, 255, 255));
+    border-right: 2px solid var(rgb(255, 255, 255));
+    border-bottom: 2px solid var(rgb(255, 255, 255));
+}
+
+.espacio_2 {
+    border-left: 2px solid var(rgb(255, 255, 255));
+    border-bottom: 2px solid var(rgb(255, 255, 255));
+    border-top-right-radius: 20%;
+}
+
+.espacio_3 {
+    border-right: 2px solid var(rgb(255, 255, 255));
+    border-top: 2px solid var(rgb(255, 255, 255));
+    border-bottom: 2px solid var(rgb(255, 255, 255));
+}
+
+.espacio_4 {
+    border-left: 2px solid;
+    border-right: 2px solid;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+}
+
+.espacio_5 {
+    border-left: 2px solid var(rgb(255, 255, 255));
+    border-top: 2px solid var(rgb(255, 255, 255));
+    border-bottom: 2px solid var(rgb(255, 255, 255));
+}
+
+.espacio_6 {
+    border-right: 2px solid var(rgb(255, 255, 255));
+    border-top: 2px solid var(rgb(255, 255, 255));
+    border-bottom-left-radius: 20%;
+}
+
+.espacio_7 {
+    border-left: 2px solid var(rgb(255, 255, 255));
+    border-right: 2px solid var(rgb(255, 255, 255));
+    border-top: 2px solid var(rgb(255, 255, 255));
+}
+
+.espacio_8 {
+    border-left: 2px solid var(rgb(255, 255, 255));
+    border-top: 2px solid var(rgb(255, 255, 255));
+    border-bottom-right-radius: 20%;
 }

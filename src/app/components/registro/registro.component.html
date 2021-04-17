@@ -2,21 +2,23 @@
     <br><br><br>
 
     <div class="form">
-        <form action="">
+        <form [formGroup] = "registroForm" (ngSubmit)="Registrar()">
             <img src="./../assets/toadMario.png">
+            <br>
             <h1>Registro</h1>
-            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre...">
+            <input type="text" id="nombre" name="nombre" class="form-control" formControlName="nombre" placeholder="Nombre...">
             <br>
-            <input type="text" id="email" name="email" class="form-control" placeholder="Email...">
+            <input type="email" id="email" name="email" class="form-control" formControlName="email" placeholder="Email...">
             <br>
-            <input type="password" id="password" name="password" class="form-control" placeholder="Contrseña...">
+            <input type="password" id="password" name="password" class="form-control" formControlName="password" placeholder="Contrseña...">
             <br>
-            <button>Crear Usuario</button>
+            <button type="submit">Crear Usuario</button>
             <hr>
-            <p>
-                Ya tengo cuenta! <a routerLink="/login" style="color: rgb(4, 31, 138);">Iniciar sesion</a>
-            </p>
+            
         </form>
+        <p>
+            Ya tengo cuenta! <a routerLink="/login" style="color: rgb(4, 31, 138);">Iniciar sesion</a>
+        </p>
 
     </div>
 </body>
