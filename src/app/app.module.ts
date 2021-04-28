@@ -39,7 +39,6 @@ import { environment } from 'src/environments/environment';
     BrowserAnimationsModule,
     MatSliderModule,
     MatToolbarModule,
-    //para login y registracion
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule
   ],
