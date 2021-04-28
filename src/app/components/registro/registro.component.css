@@ -88,8 +88,9 @@
        background: rgb(11, 170, 170);
    }
 
-   .error-message {
+   span {
     color: rgb(255, 0, 0);
-    background-color: rgba(240, 240, 240, 0.679);
-    font-size: 20px;
+    font-size: 15px;
    }
+
+   

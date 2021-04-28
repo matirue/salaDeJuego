@@ -14,11 +14,7 @@ import { FirebaseService } from './../../service/firebase.service';
 export class LoginComponent implements OnInit {
 
   users:any;
-
-  /*loginForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
-  });*/
+  loginForm: FormGroup;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -26,27 +22,19 @@ export class LoginComponent implements OnInit {
     public router: Router,
     private firesbase : FirebaseService
   ) { 
-    this.traerUsuarios();
-  }
+    this.loginForm = this.formBuilder.group( {
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8)
+      ]]
+    });
 
-  get Email() {
-    return this.loginForm.get("email");
+    this.traerUsuarios();    
   }
-
-  get Password() {
-    return this.loginForm.get('password')
-  }
-
-  loginForm = this.formBuilder.group({
-    email: ['', [
-      Validators.required,
-      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
-    ]],
-    password: ['', [
-      Validators.required,
-      Validators.minLength(8)
-    ]]
-  });
 
 
   ngOnInit(): void {
@@ -60,14 +48,19 @@ export class LoginComponent implements OnInit {
   
   Ingresar(){
     //console.log('Form->', this.loginForm.value);
-    this.authService.Ingresar_service(this.Email?.value, this.Password?.value).then(res => {
-
-      this.users.forEach((element: { email: any; }) => {
-        if(element.email == this.Email?.value){
-          localStorage.setItem('userCurrent', JSON.stringify(element));
-          this.router.navigateByUrl('/home');
-        }
-      });      
-    }).catch(error => console.log(error))
+    if(this.loginForm.valid && (this.loginForm.get('email')?.value !== '' && this.loginForm.get('password')?.value !== '')){
+      //ingreso
+      this.authService.Ingresar_service(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value);
+      console.log("deberia entrar...");
+    }//errores
+    else if(this.loginForm.get('email')?.value !== '' && this.loginForm.get('password')?.value === ''){
+      alert("Fatla contraseña");
+    }
+    else if(this.loginForm.get('email')?.value === '' && this.loginForm.get('password')?.value !== ''){
+      alert("Fatla email");
+    }
+    else if(this.loginForm.get('email')?.value === '' && this.loginForm.get('password')?.value === ''){
+      alert("Ambos campos vacios");
+    }
   }
 }

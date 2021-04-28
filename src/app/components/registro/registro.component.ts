@@ -4,6 +4,8 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from './../../service/auth.service';
 import { Router } from '@angular/router';
 import { FirebaseService } from './../../service/firebase.service';
+import { ConfirmarPassword } from 'src/app/class/user';
+
 
 @Component({
   selector: 'app-registro',
@@ -11,21 +13,17 @@ import { FirebaseService } from './../../service/firebase.service';
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit {
-/*
-  registroForm = new FormGroup( { 
-    nombre: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl(''),
-    });*/
+
+  form: FormGroup;
 
   constructor(
     public formBuilder: FormBuilder,
-    private authService: AuthService,    
+    private authService: AuthService,
     public router: Router,
-    private firebase : FirebaseService,
-    ) { }
-  /*** Validaciones */ 
-    registroForm = this.formBuilder.group({
+    private firebase: FirebaseService,
+  ) {
+    /*** Validaciones */
+    this.form = this.formBuilder.group( {
       nombre: ['', [
         Validators.required,
         Validators.pattern("^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$"),
@@ -33,55 +31,31 @@ export class RegistroComponent implements OnInit {
       ]],
       email: ['', [
         Validators.required,
-        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
+        Validators.email
       ]],
       password: ['', [
         Validators.required,
         Validators.minLength(8)
       ]]
-    });  
-  /** Propiedades que validan el dato */
-  get Nombre() {
-    return this.registroForm.get("nombre");
+    });
   }
 
-  get Email() {
-    return this.registroForm.get("email");
-  }
+  Registrar() {
 
-  get Password() {
-    return this.registroForm.get('password')
-  }
-  /********************************************/  
-  
+    this.form.markAllAsTouched();//verifica los campos y los marca como tocado
 
-  Registrar(){
-    //console.log('Form->', this.registroForm.value);    
-    this.authService.Registrar_service(this.Nombre?.value, this.Email?.value, this.Password?.value).then((res : any) => {
-      var json = { //meter historial de las partidas
-        
-      };
-      this.router.navigateByUrl('/home');
-      this.firebase.addData('games', res.user.uid, json); //cargo el historial a la bd
-    }).catch(error => console.log(error))
+    if(this.form.valid){
+      this.authService.Registrar_service(this.form.get('nombre')?.value,
+                                        this.form.get('email')?.value,
+                                        this.form.get('password')?.value);
+                                        
+      console.log('>> Form: ', this.form);                                 
+      console.log('>> Ususario registrado');
+    }
+    else{
+      alert("ERROR en el registro!!!!!");
+    }
   }
-
-  /** Mensajes de errores */
-  public errorMessages ={
-    nombre:[
-      {type: 'required', message: 'Falta el nombre'},
-      {type: 'minlength', message: 'Nombre con un minimo de 3 caracteres'}
-    ],
-    email: [
-      {type: 'required', message: 'Falta email eletrónico'},
-      {type: 'pattern', message: 'El email no es valido'}
-    ],
-    password:[
-      {type: 'required', message: 'Falta contraseña'},
-      {type: 'minlength', message: 'Contraseña con un minimo de 8 caracteres'}
-    ]   
-  }
-  /***************************************************/
 
   ngOnInit(): void {
   }

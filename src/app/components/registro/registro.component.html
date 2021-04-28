@@ -2,17 +2,37 @@
     <br><br><br>
 
     <div class="form">
-        <form [formGroup] = "registroForm" (ngSubmit)="Registrar()">
+        <form [formGroup] = "form" (ngSubmit)="Registrar()">
             <img src="./../assets/toadMario.png">
             <br>
             <h1>Registro</h1>
-            <input type="text" id="nombre" name="nombre" class="form-control" formControlName="nombre" placeholder="Nombre...">
+            <input type="text" id="nombre" name="nombre" class="form-control" formControlName="nombre" placeholder="Nombre..." required>
+            <div class="validations" *ngIf="form.touched">
+                <span>
+                    <i class="bi bi-check-circle-fill" *ngIf="form.controls.nombre.valid"></i>
+                    El nombre debe tener mas de 3 caracteres
+                </span>
+            </div>            
             <br>
-            <input type="email" id="email" name="email" class="form-control" formControlName="email" placeholder="Email...">                 
+            <input type="email" id="email" name="email" class="form-control" formControlName="email" placeholder="Email..." required>                 
+            <div *ngIf="form.touched">
+                <span>
+                    <i class="bi bi-check-circle-fill" *ngIf="form.controls.email.valid"></i>
+                    El email debe respetar el formato "ejemplo@ejemplo.com"
+                </span>
+            </div>
+            
             <br>
-            <input type="password" id="password" name="password" class="form-control" formControlName="password" placeholder="Contrseña...">
+            <input type="password" id="password" name="password" class="form-control" formControlName="password" placeholder="Contrseña..." required>
+            <div *ngIf="form.touched">
+                <span>
+                    <i class="bi bi-check-circle-fill" *ngIf="form.controls.password.valid"></i>
+                    La contrseña debe tener 8 caracteres como minimo
+                </span>
+            </div>
             <br>
-            <button [disabled]="!registroForm.valid" type="submit">Crear Usuario</button>
+            <br>
+            <button [disabled]="!form.valid" type="submit">Crear Usuario</button>
             <hr>
             
         </form>
