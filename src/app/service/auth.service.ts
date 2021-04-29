@@ -11,6 +11,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 export class AuthService {
 
+  public user = new User();
+
   //para registro
   referencia: AngularFirestoreCollection<User>;
   usuario: User;
@@ -19,6 +21,9 @@ export class AuthService {
   referencia_login: AngularFirestoreCollection<DatosDeLogueo>;
   usuario_login: DatosDeLogueo;
 
+
+  mostrarAlert: boolean = false;
+  mensajeAlert: string = '';
 
   constructor( 
     private afAuth: AngularFireAuth,
@@ -31,6 +36,36 @@ export class AuthService {
       this.referencia_login = dataBase.collection('LoggedInUsers');
       this.usuario_login = new DatosDeLogueo();
     }
+
+
+    ngValidarError( error: string ) {
+      console.log(error);
+      switch (error) {
+          case 'auth/argument-error':
+            error = 'Debe completar todos los campos';
+            break;
+          case 'auth/invalid-email':
+            error = 'Formato de email no correcto';
+              break;
+          case 'auth/user-not-found':
+            error = 'Usuario no valido';
+              break;
+          case 'auth/wrong-password':
+            error = 'Contraseña incorrecta';
+                break;
+          default:
+            error = 'ERROR';
+            break;
+        }
+  
+      this.mostrarAlerta(error);
+      }
+    // muestro el alert
+    mostrarAlerta(error: string) {
+      this.mostrarAlert = true;
+      this.mensajeAlert = error;
+    }
+    
 
     async Ingresar_service(email:string, password:string) {   
       if(email == '' && password == ''){
@@ -63,10 +98,12 @@ export class AuthService {
             throw new Error;
           }
         }catch(e){
-          alert(e);
-        }
+          this.ngValidarError(e);
+        }       
       }
     }
+    
+
 
   async Registrar_service(nombre: string, email:string, password:string) { 
    try{

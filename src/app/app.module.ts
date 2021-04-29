@@ -19,6 +19,7 @@ import { CaraCruzComponent } from './components/cara-cruz/cara-cruz.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
+import { AdivinarMonedaComponent } from './components/adivinar-moneda/adivinar-moneda.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { environment } from 'src/environments/environment';
     PiedraPapelTijeraComponent,
     TaTeTiComponent,
     MemotestComponent,
-    CaraCruzComponent
+    CaraCruzComponent,
+    AdivinarMonedaComponent
   ],
   imports: [
     BrowserModule,

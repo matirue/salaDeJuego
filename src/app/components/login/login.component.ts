@@ -16,6 +16,9 @@ export class LoginComponent implements OnInit {
   users:any;
   loginForm: FormGroup;
 
+  mostrarAlert = false;
+  mensajeAlert = '';
+
   constructor(
     public formBuilder: FormBuilder,
     private authService: AuthService,
@@ -54,13 +57,31 @@ export class LoginComponent implements OnInit {
       console.log("deberia entrar...");
     }//errores
     else if(this.loginForm.get('email')?.value !== '' && this.loginForm.get('password')?.value === ''){
-      alert("Fatla contraseña");
+      //alert("Fatla contraseña");
+      this.mostrarAlerta("Fatla contraseña");
     }
     else if(this.loginForm.get('email')?.value === '' && this.loginForm.get('password')?.value !== ''){
-      alert("Fatla email");
+      //alert("Fatla email");
+      this.mostrarAlerta("Fatla email");
     }
     else if(this.loginForm.get('email')?.value === '' && this.loginForm.get('password')?.value === ''){
-      alert("Ambos campos vacios");
+      //alert("Ambos campos estan vacios");
+      this.mostrarAlerta("Ambos campos estan vacios");
     }
+    else{
+      this.mostrarAlerta("Usuario no valido!");
+    }
+    
+  }
+
+  
+  // muestro el alert
+  mostrarAlerta(error: string) {
+    this.mostrarAlert = true;
+    this.mensajeAlert = error;
+  }
+  // cuando doy click al icono de "x" para cerrarlo 
+  noMostrarAlert() {
+    this.mostrarAlert = false;
   }
 }

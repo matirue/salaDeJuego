@@ -18,7 +18,7 @@ body{
 
   
   .form{
-      width: 300px;
+      width: 400px;
       margin: 0 auto;
       padding: 10px;
       font-size: 10px;
@@ -62,7 +62,7 @@ body{
    .form p{
        font-size: 12px;
        padding: 0px;
-       margin: 0px 0px 5px 50px;
+       margin: 0px 0px 10px 100px;
    }
 
    .form button{
@@ -86,3 +86,8 @@ body{
    .form button:hover, .form button:active, .form button:focus{
        background: rgb(11, 170, 170);
    }
+
+   .row{
+       font-size: 15px;
+   }
+   

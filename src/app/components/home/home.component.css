@@ -44,12 +44,12 @@ nav button{
 
 div .borde{   
     color: white;
-    background-color: rgba(64, 224, 208, 0.357);
+    background-color: #9618187b;
 }
 
 div .columna12{
     font-family: 'Press Start 2P', cursive;
-    color: rgb(216, 10, 10);
+    color: rgb(252, 9, 9);
     font-size: 40px;
     font-weight: 300;
 }

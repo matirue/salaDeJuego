@@ -8,6 +8,9 @@ export class User {
     uid : string = '';
     tiempoLogin: Date = new Date();
     //agregar historial del juego
+
+    puntaje: number = 0;
+    puntajemoneda: number = 0;
 }
 
 export class DatosDeLogueo{

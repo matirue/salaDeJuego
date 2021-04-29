@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-ta-te-ti',
@@ -7,48 +7,141 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaTeTiComponent implements OnInit {
 
-  comenzar: boolean = false;
-  desabilitar: boolean = false;
-  cuadrados: any = [];
-  mensaje: string = '';
-  mostrarMensaje: boolean = false;
+  @Input() gamePath: string = "/chat"
 
+  mostrarAlert = false;
+  mensajeAlert = '';
 
-  //meter datos a la db
-  constructor() {
-    this.cuadrados = new Array(9);
+  constructor() { }
+
+  mostrarAlerta(error: string) {
+    this.mostrarAlert = true;
+    this.mensajeAlert = error;
   }
 
+  
   ngOnInit(): void {
+    let cell11: HTMLElement = <HTMLElement>document.getElementById("cell11");
+    let cell12: HTMLElement = <HTMLElement>document.getElementById("cell12");
+    let cell13: HTMLElement = <HTMLElement>document.getElementById("cell13");
+    let cell21: HTMLElement = <HTMLElement>document.getElementById("cell21");
+    let cell22: HTMLElement = <HTMLElement>document.getElementById("cell22");
+    let cell23: HTMLElement = <HTMLElement>document.getElementById("cell23");
+    let cell31: HTMLElement = <HTMLElement>document.getElementById("cell31");
+    let cell32: HTMLElement = <HTMLElement>document.getElementById("cell32");
+    let cell33: HTMLElement = <HTMLElement>document.getElementById("cell33");
+    let reset: HTMLButtonElement = <HTMLButtonElement>document.getElementById("reset");
+
+    let ttt: TTT = new TTT([cell11, cell12, cell13, cell21, cell22, cell23, cell31, cell32, cell33]);
+    cell11.onclick = (e) => { ttt.ClickCell(1, 1); }
+    cell12.onclick = (e) => { ttt.ClickCell(1, 2); }
+    cell13.onclick = (e) => { ttt.ClickCell(1, 3); }
+    cell21.onclick = (e) => { ttt.ClickCell(2, 1); }
+    cell22.onclick = (e) => { ttt.ClickCell(2, 2); }
+    cell23.onclick = (e) => { ttt.ClickCell(2, 3); }
+    cell31.onclick = (e) => { ttt.ClickCell(3, 1); }
+    cell32.onclick = (e) => { ttt.ClickCell(3, 2); }
+    cell33.onclick = (e) => { ttt.ClickCell(3, 3); }
+    reset.onclick = (e) => { ttt.Reset(); }
+
+    
+  }
+}
+
+class TTT {
+  
+  mostrarAlert = false;
+  mensajeAlert = '';
+
+  MostrarAlerta(error: string) {
+    this.mostrarAlert = true;
+     this.mensajeAlert = error;
   }
 
-  comenzarJuego() {
-    this.comenzar = true;
+
+  board: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  table: HTMLElement[];
+
+  computerSymbol: number = -1;
+  //1 or -1
+  //1="X" and -1="O"
+  //computer = O
+  gameRunning: boolean = true;
+
+  constructor(t: HTMLElement[]) {
+    this.table = t;
+    this.board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   }
 
-  jugar(casillero: number) {
-    if (this.cuadrados[casillero] == null) {
-      this.cuadrados[casillero] = "x";
+  Reset() {
+    this.board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.gameRunning = true;
+    for (let i = 0; i < 9; i++) {
+      this.table[i].style.color = "white";
+      this.table[i].innerHTML = "&nbsp;";
+    }
+  }
 
-      if (this.verificarGanador("x")) {
-        //this.cargarVictoria();
-        this.mostrarResultado("Tu Ganas!!");
+  IsFull(): boolean {
+    for (let i = 0; i < 9; i++) {
+      if (this.board[i] == 0)
+        return false;
+    }
+    return true;
+  }
+
+  ClickCell(x: number, y: number) {
+    //3*(x-1)+(y-1)
+    let p: number = 3 * (x - 1) + (y - 1);
+    if (!this.gameRunning) {
+      //alert("Game over");
+      this.MostrarAlerta("EL JUEGO TERMINO"); 
+      alert("EL JUEGO TERMINO");   
+    } else {
+      if (this.board[p] == this.computerSymbol) {
+        //alert("The computer protecting this box!");
+        this.MostrarAlerta("ESPACIO SELECCIONADO POR LA MAQUINA"); 
+        alert("ESPACIO SELECCIONADO POR LA MAQUINA");   
       }
       else {
-        if (this.verificarEmpate()) {
-          this.mostrarResultado("Empate!!");
+        if (this.board[p] == -this.computerSymbol) {
+          //alert("already played");
+          this.MostrarAlerta("YA SELECCIONASTE ESTE ESPACIO"); 
+          alert("YA SELECCIONASTE ESTE ESPACIO");
         }
         else {
-          this.desabilitar = true;
-          this.jugarCpu();
-
-          if (this.verificarGanador("o")) {
-            //this.cargarPerdida();
-            this.mostrarResultado("Tu Pierdes!!");
-          }
-          else {
-            if (this.verificarEmpate()) {
-              this.mostrarResultado("Empate");
+          this.table[p].style.color = "#25bfc4";
+          this.table[p].innerHTML = "X";
+          this.board[p] = 1;
+          if (this.win(this.board) == 1) {
+            this.gameRunning = false;
+            //alert("You have won!");
+            this.MostrarAlerta("VICTORIA!!");
+            alert("VICTORIA!!"); 
+          } else {
+            if (this.IsFull()) {
+              this.gameRunning = false;
+              //alert("Draw match");
+              this.MostrarAlerta("EMPATE!!"); 
+              alert("EMPATE!!");  
+            } else {
+              let v = this.minmax(-1, true);
+              this.board[v] = -1;
+              this.table[v].style.color = "#fac95f";
+              this.table[v].innerHTML = "O";
+              if (this.win(this.board) == -1) {
+                this.gameRunning = false;
+                //alert("You have lost!");
+                this.MostrarAlerta("TU PIERDES!!"); 
+                alert("TU PIERDES!!");  
+              } else {
+                if (this.IsFull()) {
+                  this.gameRunning = false;
+                  //alert("Draw match");
+                  this.MostrarAlerta("EMPATE!!"); 
+                  alert("EMPATE!!");  
+                }
+              }
             }
           }
         }
@@ -56,89 +149,59 @@ export class TaTeTiComponent implements OnInit {
     }
   }
 
-  /*
-  cargarVictoria() {
-    this.resultadoService.gano("tateti");
+  win(board: number[]): number {
+    var b = board[1];
+    if (board[0] == b && b == board[2] && b != 0) return b;
+    b = board[4];
+    if (board[3] == b && b == board[5] && b != 0) return b;
+    b = board[7];
+    if (board[6] == b && b == board[8] && b != 0) return b;
+    b = board[3];
+    if (board[0] == b && b == board[6] && b != 0) return b;
+    b = board[4];
+    if (board[1] == b && b == board[7] && b != 0) return b;
+    b = board[5];
+    if (board[2] == b && b == board[8] && b != 0) return b;
+    b = board[4];
+    if (board[0] == b && b == board[8] && b != 0) return b;
+    if (board[2] == b && b == board[6] && b != 0) return b;
+    return 0;
   }
 
-  cargarPerdida() {
-    this.resultadoService.perdio("tateti");
-  }*/
-
-  jugarCpu() {
-    let casillaHabilitada = false;
-    let casilla;
-
-    do {
-      casilla = Math.floor(Math.random() * 9 + 0);
-
-      if (this.cuadrados[casilla] == null) {
-        casillaHabilitada = true;
+  minmax(currentPlayer: number, root: boolean): number {
+    let winner = this.win(this.board);
+    if (winner != 0)
+      if (currentPlayer == -1)
+        return winner;
+      else
+        return -winner;
+    //possible moves
+    let possibleMoves: number[] = [];
+    for (let i = 0; i < 9; i++) {
+      if (this.board[i] == 0)
+        possibleMoves.push(i);
+    }
+    let n: number = possibleMoves.length;
+    if (n == 0)
+      return 0;
+    let which: number = -1;
+    let v: number = 100;
+    for (let j = 0; j < n; j++) {
+      let move = possibleMoves[j];
+      //play
+      this.board[move] = currentPlayer;
+      var m = -this.minmax(-currentPlayer, false);
+      this.board[move] = 0;
+      if (m < v) {
+        v = m;
+        which = move;
       }
-    } while (!casillaHabilitada);
-
-    this.cuadrados[casilla] = "o";
-    this.desabilitar = false;
+    }
+    if (root) {
+      return (which)
+    }
+    else
+      return (v)
   }
-
-  verificarGanador(jugador: string) {
-    //FILAS
-    if (this.cuadrados[0] == jugador && this.cuadrados[1] == jugador && this.cuadrados[2] == jugador) {
-      return true;
-    }
-    if (this.cuadrados[3] == jugador && this.cuadrados[4] == jugador && this.cuadrados[5] == jugador) {
-      return true;
-    }
-    if (this.cuadrados[6] == jugador && this.cuadrados[7] == jugador && this.cuadrados[8] == jugador) {
-      return true;
-    }
-    //COLUMNAS
-    if (this.cuadrados[0] == jugador && this.cuadrados[3] == jugador && this.cuadrados[6] == jugador) {
-      return true;
-    }
-    if (this.cuadrados[1] == jugador && this.cuadrados[4] == jugador && this.cuadrados[7] == jugador) {
-      return true;
-    }
-    if (this.cuadrados[2] == jugador && this.cuadrados[5] == jugador && this.cuadrados[8] == jugador) {
-      return true;
-    }
-    //DIAGONALES
-    if (this.cuadrados[0] == jugador && this.cuadrados[4] == jugador && this.cuadrados[8] == jugador) {
-      return true;
-    }
-    if (this.cuadrados[2] == jugador && this.cuadrados[4] == jugador && this.cuadrados[6] == jugador) {
-      return true;
-    }
-    return false;
-  }
-
-  verificarEmpate() {
-    let contador = 0;
-    
-    this.cuadrados.forEach((casillero: null) => {
-      if (casillero != null){
-         contador++;
-      } 
-    });
-
-    if (contador == 9) {
-      return true;
-    } 
-    else {
-      return false;
-    }
-  }
-
-  mostrarResultado(mensaje: string) {
-    this.mensaje = mensaje;
-    this.mostrarMensaje = true;
-    setTimeout(() => this.reiniciar(), 3000);
-  }
-
-  reiniciar() {
-    this.mostrarMensaje = false;
-    this.cuadrados = new Array(9);
-    this.comenzar = false;
-  }
-
 }
+  

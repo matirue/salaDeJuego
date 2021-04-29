@@ -13,10 +13,25 @@
             <br>
             <input type="password" id="password" name="password" class="form-control" formControlName="password" placeholder="Contrseña...">
             <br>
-            <button [disabled]="!loginForm.valid" type="submit">Ingresar</button>
+            <button  type="submit">Ingresar</button>          
             <hr>
-            
         </form>
+        <div *ngIf="mostrarAlert" >
+            <div class="row">
+                <div class="col-12"></div>
+                <div class="col-12">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong> ERROR! </strong> {{mensajeAlert}}
+                        <!--button type="button"  class="close" data-dismiss="alert" aria-label="Close" (click)="noMostrarAlert()">
+                            <span aria-hidden="true">&times;</span>
+                        </button-->
+                    </div>
+                </div>
+                <div class="col-12">
+                    <hr>
+                </div>
+            </div>
+        </div>
         <p>
             ¿No estas registrado? <a routerLink="/registro" style="color: rgb(4, 31, 138);">Registrarse</a>
         </p>

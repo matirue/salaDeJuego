@@ -1,0 +1,48 @@
+<body>
+    <button routerLink="/home" style="color: white;" class="nav-link">volver al Inicio</button>
+
+    <div class="title">
+        <h1> >> En qué mano? << </h1>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4">
+                        <div class="game-area">
+                            <button type="button" class="btn  btn-outline-dark" (click)="ClickIzquierdo()"
+                                [disabled]="disableIzq">
+                                <img [src]="imagenIzquierda" style="width: 200px;height: 250px;"></button>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4">
+                        <div class="game-area">
+                            <button type="button" class="btn  btn-outline-dark" (click)="ClickDerecha()"
+                                [disabled]="disableDer">
+                                <img [src]="imagenDerecha" style="width: 200px;height: 250px;">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-5">
+                            <br><br>
+                            <p class="info-game">{{mensajeAlert}}</p>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>Usuario:</td>
+                                        <td>{{ contadorGana }}</td>
+                                    </tr>
+    
+                                    <tr>
+                                        <td>Maquina:</td>
+                                        <td>{{ contadorPierde }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-4"></div>                    
+                </div>
+    </div>
+</body>

@@ -1,26 +1,43 @@
 <body>
-    <button routerLink="/home" style="color: white;" class="nav-link">volver al Inicio</button>
-    
-    <div class="contenedor-tateti">
-        <label>
-            <h1> >> Ta - Te - Ti << </h1>
-        </label>
+  <button routerLink="/home" style="color: white;" class="nav-link">volver al Inicio</button>
 
-        <div class="contenedor-game">
-          <h2 *ngIf="mostrarMensaje" style="color: rgb(26, 179, 12);">{{mensaje}}</h2>
+  <div class="row">
 
-          <div *ngIf="comenzar && !mostrarMensaje" class="contenedor-tablero">
-              <button [disabled]="desabilitar" class="espacio_0" [ngClass]="{circulo: cuadrados[0] == 'o', cruz: cuadrados[0] == 'x'}" (click)="jugar(0)"></button>
-              <button [disabled]="desabilitar" class="espacio_1" [ngClass]="{circulo: cuadrados[1] == 'o', cruz: cuadrados[1] == 'x'}" (click)="jugar(1)"></button>
-              <button [disabled]="desabilitar" class="espacio_2" [ngClass]="{circulo: cuadrados[2] == 'o', cruz: cuadrados[2] == 'x'}" (click)="jugar(2)"></button>
-              <button [disabled]="desabilitar" class="espacio_3" [ngClass]="{circulo: cuadrados[3] == 'o', cruz: cuadrados[3] == 'x'}" (click)="jugar(3)"></button>
-              <button [disabled]="desabilitar" class="espacio_4" [ngClass]="{circulo: cuadrados[4] == 'o', cruz: cuadrados[4] == 'x'}" (click)="jugar(4)"></button>
-              <button [disabled]="desabilitar" class="espacio_5" [ngClass]="{circulo: cuadrados[5] == 'o', cruz: cuadrados[5] == 'x'}" (click)="jugar(5)"></button>
-              <button [disabled]="desabilitar" class="espacio_6" [ngClass]="{circulo: cuadrados[6] == 'o', cruz: cuadrados[6] == 'x'}" (click)="jugar(6)"></button>
-              <button [disabled]="desabilitar" class="espacio_7" [ngClass]="{circulo: cuadrados[7] == 'o', cruz: cuadrados[7] == 'x'}" (click)="jugar(7)"></button>
-              <button [disabled]="desabilitar" class="espacio_8" [ngClass]="{circulo: cuadrados[8] == 'o', cruz: cuadrados[8] == 'x'}" (click)="jugar(8)"></button>
-          </div>
-          <button *ngIf="!comenzar" type="button" (click)="comenzarJuego()">comenzar</button>
-        </div>
+    <div class="col-md-3"></div>
+    <div class="contenedor-tateti col-md-6">
+      <label>
+        <h1> >> Ta - Te - Ti << </h1>
+      </label>
+  
+      <div align="center">
+        <table align="center">
+          <tr>
+            <td id="cell11" class="cell">&nbsp;</td>
+            <td id="cell12" class="cell">&nbsp;</td>
+            <td id="cell13" class="cell">&nbsp;</td>
+          </tr>
+          <tr>
+            <td id="cell21" class="cell">&nbsp;</td>
+            <td id="cell22" class="cell">&nbsp;</td>
+            <td id="cell23" class="cell">&nbsp;</td>
+          </tr>
+          <tr>
+            <td id="cell31" class="cell">&nbsp;</td>
+            <td id="cell32" class="cell">&nbsp;</td>
+            <td id="cell33" class="cell">&nbsp;</td>
+          </tr>
+        </table>
+        <hr>
+        <p class="info-game">{{mensajeAlert}}</p>
+        <br /><br />
+        <input id="reset" align="center" type="button" class="boton" value="RESET" />
+        <br /><br />
+  
+  
       </div>
+  
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+  
 </body>
