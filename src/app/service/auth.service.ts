@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { DatosDeLogueo, User } from '../class/user';
+import { DatosDeLogueo, User, User_Mensaje } from '../class/user';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
@@ -28,13 +29,16 @@ export class AuthService {
   constructor( 
     private afAuth: AngularFireAuth,
     private router: Router,
-    private dataBase : AngularFirestore
+    private dataBase : AngularFirestore,
+    private dataBase_angFireDB: AngularFireDatabase
     ) { 
       this.referencia = dataBase.collection('users');
       this.usuario = new User();
 
       this.referencia_login = dataBase.collection('LoggedInUsers');
       this.usuario_login = new DatosDeLogueo();
+
+      this.referencia_mensaje = dataBase_angFireDB.list(this.urlBD_mensaje);
     }
 
 
@@ -146,6 +150,39 @@ export class AuthService {
   getUsuario_service() { 
     return  this.afAuth.authState.pipe(first()).toPromise();
   }
+
+//********************Seccion chat***************************** */
+private urlBD_mensaje = '/Mensaje';
+
+referencia_mensaje: AngularFireList<User_Mensaje>;
+
+getAll(): AngularFireList<User_Mensaje> {
+  return this.referencia_mensaje;
+}
+
+Crear(dato: User_Mensaje): any {
+  return this.referencia_mensaje.push(dato);
+}
+
+Borrar(dato: string): Promise<void> {
+  return this.referencia_mensaje.remove(dato);
+}
+
+BorrarTodo(): Promise<void> {
+  return this.referencia_mensaje.remove();
+}
+
+Actualizar(dato: string, algo: any): Promise<void> {
+  return this.referencia_mensaje.update(dato, algo);
+}
+
+
+
+
+
+//********************fin Seccion chat***************************** */
+
+
 
 
 }

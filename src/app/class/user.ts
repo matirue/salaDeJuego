@@ -18,6 +18,15 @@ export class DatosDeLogueo{
     tiempoLogin: Date = new Date();
 }
 
+export class User_Mensaje {
+  id: string = '';
+  usuario: string = '';
+  mensaje: string = '';
+  fecha: string = '';
+}
+
+
+
 export function ConfirmarPassword(pass: AbstractControl) {
 
     if(pass && (pass.value !== null || pass.value !== undefined)){

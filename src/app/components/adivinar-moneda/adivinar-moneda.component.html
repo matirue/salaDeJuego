@@ -5,7 +5,7 @@
         <h1> >> En qué mano? << </h1>
                 <div class="row">
                     <div class="col-md-1"></div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="game-area">
                             <button type="button" class="btn  btn-outline-dark" (click)="ClickIzquierdo()"
                                 [disabled]="disableIzq">
@@ -13,13 +13,16 @@
                         </div>
                     </div>
                     <div class="col-md-1"></div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="game-area">
                             <button type="button" class="btn  btn-outline-dark" (click)="ClickDerecha()"
                                 [disabled]="disableDer">
                                 <img [src]="imagenDerecha" style="width: 200px;height: 250px;">
                             </button>
                         </div>
+                    </div>
+                    <div class="col-md-4">
+                        <app-chat></app-chat>
                     </div>
                 </div>
 
@@ -42,7 +45,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-4"></div>                    
+                        <div class="col-md-4">
+                            
+                        </div>                    
                 </div>
     </div>
 </body>

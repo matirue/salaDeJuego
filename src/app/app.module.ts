@@ -20,6 +20,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { AdivinarMonedaComponent } from './components/adivinar-moneda/adivinar-moneda.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AdivinarMonedaComponent } from './components/adivinar-moneda/adivinar-m
     TaTeTiComponent,
     MemotestComponent,
     CaraCruzComponent,
-    AdivinarMonedaComponent
+    AdivinarMonedaComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,31 @@
+
+<div class="row">
+    <h1>CHAT</h1>
+    <div class="row msg-container frame" #scrollframe>
+        <div class="msjs">
+            <div *ngFor="let item of item$ | async">
+                <div class="col m12 col s12">
+                    <!--div *ngIf="item.usuario == token" class="box-blue  "-->
+                    <div *ngIf="item.usuario == token" class="box-blue  ">
+                        <p> {{ item.mensaje }} </p>
+                        <strong> {{ item.usuario }} </strong>&nbsp;
+                        <span class="date "> {{ item.hora }}</span>
+
+                    </div>
+
+                    <!--div *ngIf="item.usuario != token" class="box-gray"-->
+                    <div *ngIf="item.usuario != token" class="box-gray">
+                        <p> {{ item.mensaje }} </p>
+                        <strong> {{ item.usuario }} </strong>&nbsp;
+                        <span class="date"> {{ item.hora }}</span>
+                    </div>
+
+                    
+                </div>
+                
+            </div>
+            <input  type="text" id="mensaje" name="mensaje"  >
+            <button (click)="EnviarMensaje()">Enviar</button>
+        </div>
+    </div>
+</div>

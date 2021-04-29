@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { User_Mensaje } from '../class/user';
 
 @Injectable({
   providedIn: 'root'
@@ -26,4 +27,30 @@ export class FirebaseService {
   updateData(collection: string, id: string, json: any){
     this.dataBase.collection(collection).doc(id).update(json);
   }
+
+   
+  //********************Seccion chat***************************** */
+
+  referencia_chatFB!: AngularFirestoreCollection<User_Mensaje>;
+
+  private url_chat = '/chat';
+
+  LeerTodo(): AngularFirestoreCollection<User_Mensaje> {
+    this.referencia_chatFB = this.dataBase.collection(this.url_chat)
+    return this.referencia_chatFB;
+  }
+
+  Crear(mensajes: User_Mensaje): any {
+    this.referencia_chatFB = this.dataBase.collection(this.url_chat)
+    return this.referencia_chatFB.add({ ...mensajes });
+  }
+
+  Borrar(id: string): Promise<void> {
+    return this.referencia_chatFB.doc(id).delete();
+  }
+
+  Actualizar(id: string, dato: any): Promise<void> {
+    return this.referencia_chatFB.doc(id).update(dato);
+  }  
+  //********************fin Seccion chat***************************** */
 }
