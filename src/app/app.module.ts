@@ -43,7 +43,7 @@ import { ChatComponent } from './components/chat/chat.component';
     BrowserAnimationsModule,
     MatSliderModule,
     MatToolbarModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule
   ],
   providers: [],
