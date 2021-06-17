@@ -25,7 +25,7 @@
 
 
   .form{
-      width: 300px;
+      width: 400px;
       margin: 0 auto;
       padding: 10px;
       font-size: 10px;
@@ -92,5 +92,9 @@
     color: rgb(255, 0, 0);
     font-size: 15px;
    }
+
+   .row{
+    font-size: 15px;
+}
 
    

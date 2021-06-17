@@ -16,6 +16,9 @@ export class RegistroComponent implements OnInit {
 
   form: FormGroup;
 
+  mostrarAlert = false;
+  mensajeAlert = '';
+
   constructor(
     public formBuilder: FormBuilder,
     private authService: AuthService,
@@ -44,7 +47,7 @@ export class RegistroComponent implements OnInit {
 
     this.form.markAllAsTouched();//verifica los campos y los marca como tocado
 
-    if(this.form.valid){
+    if(this.form.valid && (this.form.get('email')?.value !== '' && this.form.get('password')?.value !== '' && this.form.get('nombre')?.value !== '')){
       this.authService.Registrar_service(this.form.get('nombre')?.value,
                                         this.form.get('email')?.value,
                                         this.form.get('password')?.value);
@@ -52,9 +55,49 @@ export class RegistroComponent implements OnInit {
       console.log('>> Form: ', this.form);                                 
       console.log('>> Ususario registrado');
     }
-    else{
-      alert("ERROR en el registro!!!!!");
+    else if(this.form.get('email')?.value !== '' && this.form.get('password')?.value === '' && this.form.get('nombre')?.value !== ''){
+      //alert("Fatla contraseña");
+      this.mostrarAlerta("Fatla contraseña");
     }
+    else if(this.form.get('email')?.value === '' && this.form.get('password')?.value !== '' && this.form.get('nombre')?.value !== ''){
+      //alert("Fatla email");
+      this.mostrarAlerta("Fatla email");
+    }
+    else if(this.form.get('email')?.value !== '' && this.form.get('password')?.value !== '' && this.form.get('nombre')?.value === ''){
+      //alert("Fatla nombre");
+      this.mostrarAlerta("Fatla nombre");
+    }
+    else if(this.form.get('email')?.value !== '' && this.form.get('password')?.value === '' && this.form.get('nombre')?.value === ''){
+      //alert("Fatla nombre");
+      this.mostrarAlerta("Fatla nombre y contraseña");
+    }
+    else if(this.form.get('email')?.value === '' && this.form.get('password')?.value === '' && this.form.get('nombre')?.value !== ''){
+      //alert("Fatla nombre");
+      this.mostrarAlerta("Fatla email y contraseña");
+    }
+    else if(this.form.get('email')?.value === '' && this.form.get('password')?.value !== '' && this.form.get('nombre')?.value === ''){
+      //alert("Fatla nombre");
+      this.mostrarAlerta("Fatla email y nombre");
+    }
+    else if(this.form.get('email')?.value === '' && this.form.get('password')?.value === '' && this.form.get('nombre')?.value === ''){
+      //alert("Ambos campos estan vacios");
+      this.mostrarAlerta("Todos los campos estan vacios");
+    }
+    else if(this.form.get('email')?.value !== '' && ((this.form.get('password')?.value).minLength < 8) && this.form.get('nombre')?.value !== ''){
+      //alert("Ambos campos estan vacios");
+      this.mostrarAlerta(" La contraseña debe tener al menos 8 caracteres ");
+    }
+    else{
+      //alert("ERROR en el registro!!!!!");
+      this.mostrarAlerta(" en el registro!!!!!");
+      
+    }
+  }
+
+  // muestro el alert
+  mostrarAlerta(error: string) {
+    this.mostrarAlert = true;
+    this.mensajeAlert = error;
   }
 
   ngOnInit(): void {

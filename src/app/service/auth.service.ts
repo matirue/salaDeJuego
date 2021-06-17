@@ -122,7 +122,7 @@ export class AuthService {
 
           //agrego la info del usuario en la bd
          this.referencia.add({...this.usuario}).then( () => [
-           alert("Usuario registrado con Exito!!!"),
+           //alert("Usuario registrado con Exito!!!"),
            console.log("Usuario registrado con Exito!!!")
          ]);
          this.router.navigate(['/login']);
@@ -132,8 +132,8 @@ export class AuthService {
       else {
         throw new Error;
       }
-   }catch(error){
-     alert(error);     
+   }catch(e){
+    this.ngValidarError(e);   
    }    
   }
 

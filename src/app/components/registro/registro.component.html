@@ -7,35 +7,51 @@
             <br>
             <h1>Registro</h1>
             <input type="text" id="nombre" name="nombre" class="form-control" formControlName="nombre" placeholder="Nombre..." required>
-            <div class="validations" *ngIf="form.touched">
+            <!--div class="validations" *ngIf="form.touched">
                 <span>
                     <i class="bi bi-check-circle-fill" *ngIf="form.controls.nombre.valid"></i>
                     El nombre debe tener mas de 3 caracteres
                 </span>
-            </div>            
+            </div-->            
             <br>
             <input type="email" id="email" name="email" class="form-control" formControlName="email" placeholder="Email..." required>                 
-            <div *ngIf="form.touched">
+            <!--div *ngIf="form.touched">
                 <span>
                     <i class="bi bi-check-circle-fill" *ngIf="form.controls.email.valid"></i>
                     El email debe respetar el formato "ejemplo@ejemplo.com"
                 </span>
-            </div>
+            </div-->
             
             <br>
             <input type="password" id="password" name="password" class="form-control" formControlName="password" placeholder="Contrseña..." required>
-            <div *ngIf="form.touched">
+            <!--div *ngIf="form.touched">
                 <span>
                     <i class="bi bi-check-circle-fill" *ngIf="form.controls.password.valid"></i>
                     La contrseña debe tener 8 caracteres como minimo
                 </span>
-            </div>
+            </div-->
             <br>
             <br>
-            <button [disabled]="!form.valid" type="submit">Crear Usuario</button>
+            <button type="submit">Crear Usuario</button>
             <hr>
             
         </form>
+        <div *ngIf="mostrarAlert" >
+            <div class="row">
+                <div class="col-12"></div>
+                <div class="col-12">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong> ERROR! </strong> {{mensajeAlert}}
+                        <!--button type="button"  class="close" data-dismiss="alert" aria-label="Close" (click)="noMostrarAlert()">
+                            <span aria-hidden="true">&times;</span>
+                        </button-->
+                    </div>
+                </div>
+                <div class="col-12">
+                    <hr>
+                </div>
+            </div>
+        </div>
         <p>
             Ya tengo cuenta! <a routerLink="/login" style="color: rgb(4, 31, 138);">Iniciar sesion</a>
         </p>
